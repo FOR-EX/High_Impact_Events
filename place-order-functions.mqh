@@ -162,24 +162,32 @@ void managePendingOrder(){
 
     double currentNumberofOrder = OrdersTotal();
 
-    //
-    // if (currentNumberofOrder && (Bid > sessionResistance)){
-    //     if(newCandle >= bullTimesOne || isDivergence || isLowerDivergence || newCandle > lastHighestPeakValue){
-    //         //delete the pending order...
-    //         lastDeletedOrder = OrderDelete(ticket_buy, clrCornsilk);
-    //         count = 0;
-    //     }
-    // }
+    //If another bearish SMC appeared
+    if((currentNumberofOrder == 1) && isBearishSMCHere){
 
-    // //
-    // if (currentNumberofOrder && (Bid < sessionSupport)){
-    //     if(newCandle <= BearTimesOne || isDivergence || isLowerDivergence || newCandle < lastLowestLowValue){
-    //         //delete the pending order...
-    //         lastDeletedOrder = OrderDelete(ticket_sell, clrCornsilk);
-    //         count = 0;
-    //     }
-    // }
-    
+        Print("New Bear");
+        lastDeletedOrder = OrderDelete(ticket_sell, clrCornsilk);
+        count = 0;
+        placeBearishOrder();
+
+    }
+
+    if (currentNumberofOrder && !isTradingTime){
+
+        lastDeletedOrder = OrderDelete(ticket_sell, clrCornsilk);
+        count = 0;
+    }
+
+    //If another Bullish SMC appeared
+    if((currentNumberofOrder == 1) && isBullishSMCHere){
+
+        Print("New Bear");
+        lastDeletedOrder = OrderDelete(ticket_buy, clrCornsilk);
+        count = 0;
+        placeBearishOrder();
+
+    }
+
     if(breakEvenSwitch){
         //function to set BE for Buy orders
         if (currentNumberofOrder && (Bid > sessionResistance)){

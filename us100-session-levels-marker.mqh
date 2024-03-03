@@ -96,7 +96,7 @@ void findSessionSupport(){
 bool checkTradingTime(){
    int tradingMinute = newsReleaseMinute - 10;
    if (currentHour == tradingTimeRangeHour){
-      if (currentMinute < tradingMinute || currentMinute > newsReleaseMinute && newsReleaseMinute != 0){
+      if (currentMinute < tradingMinute || (currentMinute > (newsReleaseMinute+1)) && newsReleaseMinute != 0){
          return isTradingTime = false;
       }
       return isTradingTime = true;

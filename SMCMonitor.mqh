@@ -38,6 +38,7 @@ void runSMCMonitor(){
     }
 
     if(isBearishSMC){
+        Print("Bearish after bearish");
         isBearishSMCHere = true;
         isBearishSMC = false;
     } else {
@@ -49,7 +50,7 @@ int count = 0;
 
 void runBullishSMC(){
     //get the  lastCandleClose & startingCandle
-    if ((newCandle > secondCandle || newCandle==secondCandle) && secondCandle > thirdCandle && thirdCandle > fourthCandle){
+    if (newCandle > secondCandle  && secondCandle > thirdCandle && thirdCandle > fourthCandle){
         lastCandleClose = newCandle;
         startingCandle = iOpen(Symbol(),smcTimeFrame,(3 + count));
         startTime = 3 + count;
@@ -58,7 +59,7 @@ void runBullishSMC(){
     }
 
     // reset count condition
-    if (newCandle < secondCandle && secondCandle > thirdCandle && thirdCandle > fourthCandle && fourthCandle > fifthCandle && OrdersTotal()==0){
+    if ((newCandle < secondCandle || newCandle==secondCandle) && secondCandle > thirdCandle && thirdCandle > fourthCandle && fourthCandle > fifthCandle){
         isBullishSMC = true;
         count = 0;
         if(newCandle > lastHighestPeakValue){
@@ -78,7 +79,7 @@ void runBearishSMC(){
     }
 
     // reset count condition
-    if ((newCandle > secondCandle || newCandle==secondCandle) && secondCandle < thirdCandle && thirdCandle < fourthCandle && fourthCandle < fifthCandle && OrdersTotal()==0){
+    if ((newCandle > secondCandle || newCandle == secondCandle) && secondCandle < thirdCandle && thirdCandle < fourthCandle && fourthCandle < fifthCandle ){
         isBearishSMC = true;
         count = 0;
         if(newCandle < lastLowestLowValue){

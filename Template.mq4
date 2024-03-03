@@ -31,7 +31,7 @@ void OnTick()
     //---
     // Day-light-saving-time-days means you will trade an hour earlier than days that are not in day light saving time.
    
-    riskedAmount = 24.55; //risked money in USD
+    riskedAmount = 5; //risked money in USD
     takeProfitMultiplier = 3.1; //
     smcTimeFrame = 1; //Update the timeframe from engulferTimeFrame
     placeOrderTimeframe = smcTimeFrame;
@@ -40,9 +40,9 @@ void OnTick()
     afterBreakLevelsTimeframe = smcTimeFrame;
     sessionLevelTimeFrame = 1; //Update the timeframe from sessionLevelMarker 
     tradingTimeRangeHour = 16;
-    newsReleaseMinute = 50;
+    newsReleaseMinute = 45;
 
-    bool isExpectingBull = true;
+    bool isExpectingBull = false;
 
     breakEvenSwitch = false;
 
@@ -64,7 +64,7 @@ void OnTick()
         //establish the last highest peak and last lowest low...
         establishLastHighestPeak();
         establishLastLastLowestLow();
-
+        Print("currentNumber od Order: ", OrdersTotal());
         //Condition to place a bullish order
         if(isTradingTime){
 
