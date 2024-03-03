@@ -17,7 +17,7 @@ int OnInit()
     }
 //+------------------------------------------------------------------+
 //| Expert deinitialization function                                 |
-//+------------------------------------------------------------------+
+//+------------------------------------------------------------------+  
 void OnDeinit(const int reason)
     {
     //---
@@ -31,16 +31,21 @@ void OnTick()
     //---
     // Day-light-saving-time-days means you will trade an hour earlier than days that are not in day light saving time.
    
-    riskedAmount = 200; //risked money in USD
-    takeProfitMultiplier = 2.4; //
+    riskedAmount = 24.55; //risked money in USD
+    takeProfitMultiplier = 3.1; //
     smcTimeFrame = 1; //Update the timeframe from engulferTimeFrame
     placeOrderTimeframe = smcTimeFrame;
-    divergenceMonitorTimeFrame = 5; //Update the timeframe from divergenceMonitor
+    divergenceMonitorTimeFrame = 1; //Update the timeframe from divergenceMonitor
     lower_divergenceMonitorTimeFrame = smcTimeFrame;
     afterBreakLevelsTimeframe = smcTimeFrame;
     sessionLevelTimeFrame = 1; //Update the timeframe from sessionLevelMarker 
     tradingTimeRangeHour = 15;
+    newsReleaseMinute = 30;
+
+    bool isExpectingBull = false;
+
     breakEvenSwitch = false;
+
     double lastMinute = currentMinute;
 
     //manage existing pending order...
@@ -54,6 +59,7 @@ void OnTick()
 
         //run this to see if it is tradingtime....
         checkTradingTime();
+        Comment("currentMinute", currentMinute + "currentHour: ", currentHour);
 
         //establish the last highest peak and last lowest low...
         establishLastHighestPeak();
@@ -63,17 +69,23 @@ void OnTick()
         if(isTradingTime){
 
             runSMCMonitor();
-            //this is the condition for placing order during bullish conditions
-            if (isBullishSMCHere){
-                placeBullishOrder();
-                Print("Bullish Order Placed");
-                } 
-            // -------------------------------------------------------------------//
 
-            //this is the condition for placing order during bearish conditions
-            if(isBearishSMCHere){
-                placeBearishOrder();
-                Print("Bearish Order Placed");
+            string commentText = "isBullishSMCHere: " + isBullishSMCHere + " | isBearishSMCHere: " + isBearishSMCHere;
+            Comment(commentText);
+            Print(commentText);
+            if(isExpectingBull){
+                //this is the condition for placing order during bullish conditions
+                if (isBullishSMCHere){
+                    placeBullishOrder();
+                    Print("Bullish Order Placed");
+                    } 
+                // -------------------------------------------------------------------//
+            }else{
+                //this is the condition for placing order during bearish conditions
+                if(isBearishSMCHere){
+                    placeBearishOrder();
+                    Print("Bearish Order Placed");
+                }
             }
         }
 

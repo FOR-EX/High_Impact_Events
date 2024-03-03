@@ -30,26 +30,26 @@ void runSMCMonitor(){
     runBearishSMC();
     
     if(isBullishSMC){
-        if(lastCandleClose > lastHighestPeakValue){
-            isBullishSMCHere = true;
-        } else {
-            isBullishSMCHere = false;
-        }
+        isBullishSMCHere = true;
+        isBullishSMC = false;
+
+    } else {
+        isBullishSMCHere = false;
     }
 
     if(isBearishSMC){
-        if(lastCandleClose < lastLowestLowValue){
-            isBearishSMCHere = true;
-        } else {
-            isBearishSMCHere = false;
-        }
+        isBearishSMCHere = true;
+        isBearishSMC = false;
+    } else {
+        isBearishSMCHere = false;
     }
 }
 
 int count = 0;
+
 void runBullishSMC(){
     //get the  lastCandleClose & startingCandle
-    if (newCandle > secondCandle && secondCandle > thirdCandle && thirdCandle > fourthCandle){
+    if ((newCandle > secondCandle || newCandle==secondCandle) && secondCandle > thirdCandle && thirdCandle > fourthCandle){
         lastCandleClose = newCandle;
         startingCandle = iOpen(Symbol(),smcTimeFrame,(3 + count));
         startTime = 3 + count;
@@ -78,7 +78,7 @@ void runBearishSMC(){
     }
 
     // reset count condition
-    if (newCandle > secondCandle && secondCandle < thirdCandle && thirdCandle < fourthCandle && fourthCandle < fifthCandle && OrdersTotal()==0){
+    if ((newCandle > secondCandle || newCandle==secondCandle) && secondCandle < thirdCandle && thirdCandle < fourthCandle && fourthCandle < fifthCandle && OrdersTotal()==0){
         isBearishSMC = true;
         count = 0;
         if(newCandle < lastLowestLowValue){

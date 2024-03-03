@@ -9,6 +9,7 @@
     bool isTradingTime = false;
 
     int tradingTimeRangeHour;
+    int newsReleaseMinute;
 // custom functions variables
     double sessionResistanceArray [];
     double sessionSupportArray [];
@@ -93,8 +94,9 @@ void findSessionSupport(){
 } 
 
 bool checkTradingTime(){
-   if (currentHour == 14){
-      if (currentMinute > 50 || currentMinute==0 ){
+   int tradingMinute = newsReleaseMinute - 10;
+   if (currentHour == tradingTimeRangeHour){
+      if (currentMinute < tradingMinute || currentMinute > newsReleaseMinute && newsReleaseMinute != 0){
          return isTradingTime = false;
       }
       return isTradingTime = true;
