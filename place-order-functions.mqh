@@ -56,12 +56,12 @@ void placeBullishOrder(){
         createBullishFibo();
 
         bullStopLoss = Level161_8 - currentSpreadValue;
-        buyEntryPrice = NormalizeDouble(Level61_8,2);
-        stopLossinPips = (buyEntryPrice - bullStopLoss)*100;
-        bullTakeProfit = stopLossinPips/100 * takeProfitMultiplier + buyEntryPrice;
+        buyEntryPrice = Level100;
+        stopLossinPips = (buyEntryPrice - bullStopLoss)*1;
+        bullTakeProfit = stopLossinPips/1 * takeProfitMultiplier + buyEntryPrice;
         bullTimesOne = stopLossinPips/100 * 1 + buyEntryPrice;
         riskPerPips = riskedAmount/stopLossinPips;
-        bullLotSize = NormalizeDouble(((riskPerPips*buyEntryPrice)/contractSize),2); //1 if us100 2if usdjpy
+        bullLotSize = (riskPerPips*buyEntryPrice)/contractSize; //1 if us100 2if usdjpy
         Print("riskPerPips:", riskPerPips);
         Print ("bullLotSize is:", bullLotSize);
         Print("bullTakeProfit:", bullTakeProfit);
@@ -130,9 +130,7 @@ void placeBearishOrder(){
 
         bearStopLoss = Level161_8 + currentSpreadValue;
         sellEntryPrice = Level100;
-        Print("sellEntryPrice:", sellEntryPrice);
         stopLossinPips = (bearStopLoss - sellEntryPrice)*1;
-        Print("stopLossinPips:",stopLossinPips);
         bearTakeProfit = (sellEntryPrice - ((stopLossinPips/1) * takeProfitMultiplier));
         BearTimesOne = (sellEntryPrice - ((stopLossinPips/100) * 1));
         riskPerPips = riskedAmount/stopLossinPips;

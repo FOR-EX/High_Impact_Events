@@ -39,10 +39,10 @@ void OnTick()
     lower_divergenceMonitorTimeFrame = smcTimeFrame;
     afterBreakLevelsTimeframe = smcTimeFrame;
     sessionLevelTimeFrame = 1; //Update the timeframe from sessionLevelMarker 
-    tradingTimeRangeHour = 15;
-    newsReleaseMinute = 30;
+    tradingTimeRangeHour = 16;
+    newsReleaseMinute = 50;
 
-    bool isExpectingBull = false;
+    bool isExpectingBull = true;
 
     breakEvenSwitch = false;
 
