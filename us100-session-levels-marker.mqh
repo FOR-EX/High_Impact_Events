@@ -95,10 +95,24 @@ void findSessionSupport(){
 
 bool checkTradingTime(){
    int tradingMinute = newsReleaseMinute - 10;
-   if (currentHour == tradingTimeRangeHour){
+
+   if(newsReleaseMinute == 0){
+
+      tradingMinute = tradingMinute + 10;
+
+      if(currentHour == (tradingTimeRangeHour-1) && currentMinute > 50){
+         return isTradingTime = true;
+      }
+      if(currentHour == tradingTimeRangeHour && currentMinute == newsReleaseMinute){
+         return isTradingTime = true;
+      }
+   }
+
+   if (currentHour == tradingTimeRangeHour && newsReleaseMinute != 0){
       if (currentMinute < tradingMinute || (currentMinute > (newsReleaseMinute+1)) && newsReleaseMinute != 0){
          return isTradingTime = false;
       }
+
       return isTradingTime = true;
    } else {
       return isTradingTime = false;

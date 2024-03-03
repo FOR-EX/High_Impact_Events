@@ -72,8 +72,9 @@ void placeBullishOrder(){
         Print("Minimum Lot Allowed:", MarketInfo(Symbol(),MODE_MINLOT));
         Print("startingCandle is:",startingCandle);
         Print("startTime is:",startTime);
-
-        ticket_buy = OrderSend(Symbol(),OP_BUYLIMIT,bullLotSize,buyEntryPrice,3,bullStopLoss,bullTakeProfit,NULL,0,0,clrAquamarine);
+        if(stopLossinPips >= 0.0002){
+            ticket_buy = OrderSend(Symbol(),OP_BUYLIMIT,bullLotSize,buyEntryPrice,3,bullStopLoss,bullTakeProfit,NULL,0,0,clrAquamarine);
+        }
         count = 0;
         updateLastHigh();
         isBullishSMC = false;
@@ -146,7 +147,9 @@ void placeBearishOrder(){
         Print("Minimum Lot Allowed:", MarketInfo(Symbol(),MODE_MINLOT));
         Print("About lot size:", MarketInfo(Symbol(),MODE_LOTSIZE));
         Print("bearLotSize", bearLotSize);
-        ticket_sell = OrderSend(Symbol(),OP_SELLLIMIT,bearLotSize,sellEntryPrice,3,bearStopLoss,bearTakeProfit,NULL,0,0,clrAquamarine);
+        if(stopLossinPips >= 0.0002){
+            ticket_sell = OrderSend(Symbol(),OP_SELLLIMIT,bearLotSize,sellEntryPrice,3,bearStopLoss,bearTakeProfit,NULL,0,0,clrAquamarine);
+        }
         count = 0;
         // updateLastLow();
         isBearishSMC = false;
@@ -184,7 +187,7 @@ void managePendingOrder(){
         Print("New Bear");
         lastDeletedOrder = OrderDelete(ticket_buy, clrCornsilk);
         count = 0;
-        placeBearishOrder();
+        placeBullishOrder();
 
     }
 

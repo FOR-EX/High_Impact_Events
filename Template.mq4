@@ -39,8 +39,8 @@ void OnTick()
     lower_divergenceMonitorTimeFrame = smcTimeFrame;
     afterBreakLevelsTimeframe = smcTimeFrame;
     sessionLevelTimeFrame = 1; //Update the timeframe from sessionLevelMarker 
-    tradingTimeRangeHour = 16;
-    newsReleaseMinute = 45;
+    tradingTimeRangeHour = 21;
+    newsReleaseMinute = 0;
 
     bool isExpectingBull = false;
 
@@ -64,7 +64,6 @@ void OnTick()
         //establish the last highest peak and last lowest low...
         establishLastHighestPeak();
         establishLastLastLowestLow();
-        Print("currentNumber od Order: ", OrdersTotal());
         //Condition to place a bullish order
         if(isTradingTime){
 
