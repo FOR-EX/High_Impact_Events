@@ -1,0 +1,13 @@
+1. CAD CPI m/m
+2. USD Core Retail Sales m/m
+3. USD Unemployment Claims
+4. USD ISM Manufacturing PMI
+5. USD Non-Farm Employment Change
+6. USD ISM Services PMI
+7. USD Core CPI m/m
+8. USD CPI m/m
+9. USD CPI y/y
+10. USD Core Retail Sales m/m
+11. USD Retail Sales m/m
+12. USD Empire State Manufacturing Index
+13. USD Federal Funds Rate

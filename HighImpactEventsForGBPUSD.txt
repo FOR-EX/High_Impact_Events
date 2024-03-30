@@ -1,0 +1,8 @@
+1. GBP Claimant Count Change
+2. GBP GDP m/m
+3. GBP CPI y/y
+4. GBP Flash Manufacturing PMI
+5. GBP Flash Services PMI
+6. GBP Official Bank Rate
+7. GBP Retail Sales m/m
+8. 
