@@ -4,6 +4,7 @@
 #include "lower-divergence-monitor.mqh"
 #include "SMCMonitor.mqh"
 #include "after-break-levels.mqh"
+#include "bulk-setting.mqh"
 
 //+------------------------------------------------------------------+
 //| Expert initialization function                                   |
@@ -42,7 +43,6 @@ void OnTick()
     tradingTimeRangeHour = 15;
     newsReleaseMinute = 15;
 
-    bool isExpectingBull = true;
 
     breakEvenSwitch = false;
 
@@ -56,9 +56,13 @@ void OnTick()
 
     //This is to make codes reiterate only once per minute - making the code efficient.
     if (currentMinute != lastMinute){
-
-        //run this to see if it is tradingtime....
-        checkTradingTime();
+        
+        // run or initialize the bulksetting
+        if(runBulkSetting()){
+            //run this to see if it is tradingtime....
+            checkTradingTime();
+        }
+        
         Comment("currentMinute", currentMinute + "currentHour: ", currentHour);
 
         //establish the last highest peak and last lowest low...
@@ -72,6 +76,7 @@ void OnTick()
             string commentText = "isBullishSMCHere: " + isBullishSMCHere + " | isBearishSMCHere: " + isBearishSMCHere;
             Comment(commentText);
             Print(commentText);
+            Print("isExpectingBull is: ", isExpectingBull);
             if(isExpectingBull){
                 //this is the condition for placing order during bullish conditions
                 if (isBullishSMCHere){
